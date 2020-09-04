@@ -1,0 +1,9 @@
+d: 3;
+sigma: 1;
+rho: 10;
+T: 10;
+
+e: (1 - r)^2;
+w: integrate(r^2*e, r, 0, 1) * (4*%pi);
+g: sigma^2/(2*T);
+d * T / ( rho * g * w), numer;
