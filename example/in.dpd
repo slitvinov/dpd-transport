@@ -2,21 +2,24 @@ boundary        p p p
 
 units           si
 atom_style      dpd
-region		box block 0 20 0 20 0 20
+variable	L equal 20
+region		box block 0 $L 0 $L 0 $L
 create_box	1 box
-create_atoms	1 random 80000 123456 NULL
+variable        n equal 10
+variable	N equal $n*$L*$L*$L
+create_atoms	1 random $N 123456 NULL
 
 comm_modify     mode single vel yes
 mass            1 1.0
 
 variable        T equal 1.0/1.380649e-23
 pair_style      dpd/fdt ${T}   1.0 245455
-pair_coeff      1 1     0.0 1.0     1.0
+pair_coeff      1 1     0.0 15.0     1.0
 
 neighbor        1.0 bin
 neigh_modify    every 1 delay 0 check no once no
 
-timestep        1e-2
+timestep        1e-3
 
 fix             nve all nve
 
